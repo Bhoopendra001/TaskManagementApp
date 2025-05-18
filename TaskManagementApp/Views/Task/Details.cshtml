@@ -1,0 +1,43 @@
+﻿@model TaskManagementApp.Models.TaskModel
+
+@{
+    ViewBag.Title = "Task Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Task Details</h2>
+
+<div class="mt-3">
+    <h4>@Model.Title</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+        <br />
+        <dt class="col-sm-3">Due Date</dt>
+        <dd class="col-sm-9">@Model.DueDate.ToString("yyyy-MM-dd")</dd>
+        <br />
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+        <br />
+        <dt class="col-sm-3">Remarks</dt>
+        <dd class="col-sm-9">@Model.Remarks</dd>
+        <br />
+        <dt class="col-sm-3">Created On</dt>
+        <dd class="col-sm-9">@Model.CreatedOn.ToString("yyyy-MM-dd")</dd>
+        <br />
+        <dt class="col-sm-3">Updated On</dt>
+        <dd class="col-sm-9">@Model.UpdatedOn.ToString("yyyy-MM-dd")</dd>
+        <br />
+        <dt class="col-sm-3">Created By</dt>
+        <dd class="col-sm-9">@Model.CreatedBy</dd>
+        <br />
+        <dt class="col-sm-3">Updated By</dt>
+        <dd class="col-sm-9">@Model.UpdatedBy</dd>
+    </dl>
+</div>
+
+<div class="mt-3">
+    @Html.ActionLink("✏️ Edit", "Edit", new { id = Model.TaskId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("🔙 Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })
+</div>

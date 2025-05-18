@@ -1,0 +1,61 @@
+﻿@model TaskManagementApp.Models.TaskModel
+
+@{
+    ViewBag.Title = "Edit Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Task</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TaskId)
+    @Html.HiddenFor(m => m.CreatedOn) <!-- Preserve original CreatedOn -->
+    @Html.HiddenFor(m => m.UpdatedOn) <!-- Don't let user modify -->
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 3 })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.DueDate)
+        @Html.TextBoxFor(m => m.DueDate, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.DropDownListFor(m => m.Status,
+            new SelectList(new[] {
+                new { Value = "Pending", Text = "Pending" },
+                new { Value = "In Progress", Text = "In Progress" },
+                new { Value = "Done", Text = "Done" }
+            }, "Value", "Text", Model?.Status),
+            "Select Status",
+            new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Remarks)
+        @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", rows = 2 })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreatedBy)
+        @Html.TextBoxFor(m => m.CreatedBy, new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.UpdatedBy)
+        @Html.TextBoxFor(m => m.UpdatedBy, new { @class = "form-control" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })
+}
